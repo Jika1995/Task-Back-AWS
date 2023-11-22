@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1/f4249598918ff0b1a7f35e28e3ba34bb1b18d0eb3410780a75f7ccebcd54a377.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1/27458e8898addd170e55534150194ce0b7f8d014481eab934c52ae7fe408783b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -118,6 +118,42 @@
             "data": "UserApiPOSTusers314D1945"
           }
         ],
+        "/UserServiceStack/UserApi/PATCH--users--{userId}/EditUserIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiPATCHusersuserIdEditUserIntegration23B47D13"
+          }
+        ],
+        "/UserServiceStack/UserApi/PATCH--users--{userId}/EditUserIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiPATCHusersuserIdEditUserIntegrationPermission26737CE6"
+          }
+        ],
+        "/UserServiceStack/UserApi/PATCH--users--{userId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiPATCHusersuserId7DF77141"
+          }
+        ],
+        "/UserServiceStack/UserApi/DELETE--users--{userId}/DeleteUserIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiDELETEusersuserIdDeleteUserIntegrationD05B403F"
+          }
+        ],
+        "/UserServiceStack/UserApi/DELETE--users--{userId}/DeleteUserIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiDELETEusersuserIdDeleteUserIntegrationPermissionFBA306EF"
+          }
+        ],
+        "/UserServiceStack/UserApi/DELETE--users--{userId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiDELETEusersuserIdF9120668"
+          }
+        ],
         "/UserServiceStack/GetUserByIdLambda/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -152,6 +188,42 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CreateUserLambda0154A2EB"
+          }
+        ],
+        "/UserServiceStack/EditUserLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EditUserLambdaServiceRole6E3F55B7"
+          }
+        ],
+        "/UserServiceStack/EditUserLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EditUserLambdaServiceRoleDefaultPolicyFAC2F605"
+          }
+        ],
+        "/UserServiceStack/EditUserLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EditUserLambdaD0C48E24"
+          }
+        ],
+        "/UserServiceStack/DeleteUserLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteUserLambdaServiceRole5E37A90C"
+          }
+        ],
+        "/UserServiceStack/DeleteUserLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteUserLambdaServiceRoleDefaultPolicyCDE1D3BE"
+          }
+        ],
+        "/UserServiceStack/DeleteUserLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteUserLambdaF75E2C54"
           }
         ],
         "/UserServiceStack/CDKMetadata/Default": [

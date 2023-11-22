@@ -71,3 +71,30 @@ api.addRoutes({
     methods: [apiGateway.HttpMethod.POST]
 })
 
+const editUser = new NodejsFunction(userServiceStack, 'EditUserLambda', {
+    ...sharedLambdaProps,
+    functionName: 'editUser',
+    entry: 'src/handlers/editUser.ts'
+})
+
+usersTable.grantReadWriteData(editUser)
+
+api.addRoutes({
+    integration: new HttpLambdaIntegration('EditUserIntegration', editUser),
+    path: '/users/{userId}',
+    methods: [apiGateway.HttpMethod.PATCH]
+})
+
+const deleteUser = new NodejsFunction(userServiceStack, 'DeleteUserLambda', {
+    ...sharedLambdaProps,
+    functionName: 'deleteUser',
+    entry: 'src/handlers/deleteUser.ts'
+})
+
+usersTable.grantReadWriteData(deleteUser)
+
+api.addRoutes({
+    integration: new HttpLambdaIntegration('DeleteUserIntegration', deleteUser),
+    path: '/users/{userId}',
+    methods: [apiGateway.HttpMethod.DELETE]
+})
