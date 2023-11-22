@@ -1,0 +1,185 @@
+{
+  "version": "34.0.0",
+  "artifacts": {
+    "UserServiceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "UserServiceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "UserServiceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/us-east-1",
+      "properties": {
+        "templateFile": "UserServiceStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1/f4249598918ff0b1a7f35e28e3ba34bb1b18d0eb3410780a75f7ccebcd54a377.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "UserServiceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "UserServiceStack.assets"
+      ],
+      "metadata": {
+        "/UserServiceStack/GetUserListLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserListLambdaServiceRoleD130BDC4"
+          }
+        ],
+        "/UserServiceStack/GetUserListLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserListLambdaServiceRoleDefaultPolicyE946E598"
+          }
+        ],
+        "/UserServiceStack/GetUserListLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserListLambda0C47039F"
+          }
+        ],
+        "/UserServiceStack/UserApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiB6C12381"
+          }
+        ],
+        "/UserServiceStack/UserApi/DefaultStage/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiDefaultStage7571145A"
+          }
+        ],
+        "/UserServiceStack/UserApi/GET--users/GetUsersListIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiGETusersGetUsersListIntegration14571DA4"
+          }
+        ],
+        "/UserServiceStack/UserApi/GET--users/GetUsersListIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiGETusersGetUsersListIntegrationPermission670A60CC"
+          }
+        ],
+        "/UserServiceStack/UserApi/GET--users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiGETusersC0DE6691"
+          }
+        ],
+        "/UserServiceStack/UserApi/GET--users--{userId}/GetUserByIdIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiGETusersuserIdGetUserByIdIntegration01649BBB"
+          }
+        ],
+        "/UserServiceStack/UserApi/GET--users--{userId}/GetUserByIdIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiGETusersuserIdGetUserByIdIntegrationPermission3E4AB738"
+          }
+        ],
+        "/UserServiceStack/UserApi/GET--users--{userId}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiGETusersuserIdADD26CC4"
+          }
+        ],
+        "/UserServiceStack/UserApi/POST--users/CreateUserIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiPOSTusersCreateUserIntegration460B85BC"
+          }
+        ],
+        "/UserServiceStack/UserApi/POST--users/CreateUserIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiPOSTusersCreateUserIntegrationPermission41D94F0B"
+          }
+        ],
+        "/UserServiceStack/UserApi/POST--users/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserApiPOSTusers314D1945"
+          }
+        ],
+        "/UserServiceStack/GetUserByIdLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserByIdLambdaServiceRole7C87E7E4"
+          }
+        ],
+        "/UserServiceStack/GetUserByIdLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserByIdLambdaServiceRoleDefaultPolicyF79EBCC7"
+          }
+        ],
+        "/UserServiceStack/GetUserByIdLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserByIdLambdaDCA269A3"
+          }
+        ],
+        "/UserServiceStack/CreateUserLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateUserLambdaServiceRoleAFE39E4A"
+          }
+        ],
+        "/UserServiceStack/CreateUserLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateUserLambdaServiceRoleDefaultPolicyC1FA6D44"
+          }
+        ],
+        "/UserServiceStack/CreateUserLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateUserLambda0154A2EB"
+          }
+        ],
+        "/UserServiceStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/UserServiceStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/UserServiceStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "UserServiceStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

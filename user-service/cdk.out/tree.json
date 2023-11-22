@@ -1,0 +1,1052 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "UserServiceStack": {
+        "id": "UserServiceStack",
+        "path": "UserServiceStack",
+        "children": {
+          "Users Table": {
+            "id": "Users Table",
+            "path": "UserServiceStack/Users Table",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.TableBase",
+              "version": "2.105.0"
+            }
+          },
+          "GetUserListLambda": {
+            "id": "GetUserListLambda",
+            "path": "UserServiceStack/GetUserListLambda",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "UserServiceStack/GetUserListLambda/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "UserServiceStack/GetUserListLambda/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/GetUserListLambda/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "UserServiceStack/GetUserListLambda/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "UserServiceStack/GetUserListLambda/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "dynamodb:BatchGetItem",
+                                    "dynamodb:BatchWriteItem",
+                                    "dynamodb:ConditionCheckItem",
+                                    "dynamodb:DeleteItem",
+                                    "dynamodb:DescribeTable",
+                                    "dynamodb:GetItem",
+                                    "dynamodb:GetRecords",
+                                    "dynamodb:GetShardIterator",
+                                    "dynamodb:PutItem",
+                                    "dynamodb:Query",
+                                    "dynamodb:Scan",
+                                    "dynamodb:UpdateItem"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:aws:dynamodb:us-east-1:",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":table/users"
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "GetUserListLambdaServiceRoleDefaultPolicyE946E598",
+                            "roles": [
+                              {
+                                "Ref": "GetUserListLambdaServiceRoleD130BDC4"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.105.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "UserServiceStack/GetUserListLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "UserServiceStack/GetUserListLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "UserServiceStack/GetUserListLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.105.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "UserServiceStack/GetUserListLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+                      },
+                      "s3Key": "5c0a7a803b44bc37fae52da2225d8e530f2d61fa8ecc5b376377b62d1f49b5dd.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "DYNAMODB_TABLE_NAME": "users",
+                        "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                      }
+                    },
+                    "functionName": "getUsersList",
+                    "handler": "index.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "GetUserListLambdaServiceRoleD130BDC4",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs18.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.105.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+              "version": "2.105.0"
+            }
+          },
+          "UserApi": {
+            "id": "UserApi",
+            "path": "UserServiceStack/UserApi",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "UserServiceStack/UserApi/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                  "aws:cdk:cloudformation:props": {
+                    "corsConfiguration": {
+                      "allowHeaders": [
+                        "*"
+                      ],
+                      "allowMethods": [
+                        "*"
+                      ],
+                      "allowOrigins": [
+                        "*"
+                      ]
+                    },
+                    "name": "UserApi",
+                    "protocolType": "HTTP"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                  "version": "2.105.0"
+                }
+              },
+              "DefaultStage": {
+                "id": "DefaultStage",
+                "path": "UserServiceStack/UserApi/DefaultStage",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/UserApi/DefaultStage/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "UserApiB6C12381"
+                        },
+                        "autoDeploy": true,
+                        "stageName": "$default"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                  "version": "2.109.0-alpha.0"
+                }
+              },
+              "GET--users": {
+                "id": "GET--users",
+                "path": "UserServiceStack/UserApi/GET--users",
+                "children": {
+                  "GetUsersListIntegration": {
+                    "id": "GetUsersListIntegration",
+                    "path": "UserServiceStack/UserApi/GET--users/GetUsersListIntegration",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "UserServiceStack/UserApi/GET--users/GetUsersListIntegration/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "UserApiB6C12381"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "GetUserListLambda0C47039F",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.109.0-alpha.0"
+                    }
+                  },
+                  "GetUsersListIntegration-Permission": {
+                    "id": "GetUsersListIntegration-Permission",
+                    "path": "UserServiceStack/UserApi/GET--users/GetUsersListIntegration-Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "GetUserListLambda0C47039F",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:aws:execute-api:us-east-1:",
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              ":",
+                              {
+                                "Ref": "UserApiB6C12381"
+                              },
+                              "/*/*/users"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/UserApi/GET--users/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "UserApiB6C12381"
+                        },
+                        "authorizationType": "NONE",
+                        "routeKey": "GET /users",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "UserApiGETusersGetUsersListIntegration14571DA4"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.109.0-alpha.0"
+                }
+              },
+              "GET--users--{userId}": {
+                "id": "GET--users--{userId}",
+                "path": "UserServiceStack/UserApi/GET--users--{userId}",
+                "children": {
+                  "GetUserByIdIntegration": {
+                    "id": "GetUserByIdIntegration",
+                    "path": "UserServiceStack/UserApi/GET--users--{userId}/GetUserByIdIntegration",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "UserServiceStack/UserApi/GET--users--{userId}/GetUserByIdIntegration/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "UserApiB6C12381"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "GetUserByIdLambdaDCA269A3",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.109.0-alpha.0"
+                    }
+                  },
+                  "GetUserByIdIntegration-Permission": {
+                    "id": "GetUserByIdIntegration-Permission",
+                    "path": "UserServiceStack/UserApi/GET--users--{userId}/GetUserByIdIntegration-Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "GetUserByIdLambdaDCA269A3",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:aws:execute-api:us-east-1:",
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              ":",
+                              {
+                                "Ref": "UserApiB6C12381"
+                              },
+                              "/*/*/users/{userId}"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/UserApi/GET--users--{userId}/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "UserApiB6C12381"
+                        },
+                        "authorizationType": "NONE",
+                        "routeKey": "GET /users/{userId}",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "UserApiGETusersuserIdGetUserByIdIntegration01649BBB"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.109.0-alpha.0"
+                }
+              },
+              "POST--users": {
+                "id": "POST--users",
+                "path": "UserServiceStack/UserApi/POST--users",
+                "children": {
+                  "CreateUserIntegration": {
+                    "id": "CreateUserIntegration",
+                    "path": "UserServiceStack/UserApi/POST--users/CreateUserIntegration",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "UserServiceStack/UserApi/POST--users/CreateUserIntegration/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "UserApiB6C12381"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "CreateUserLambda0154A2EB",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.109.0-alpha.0"
+                    }
+                  },
+                  "CreateUserIntegration-Permission": {
+                    "id": "CreateUserIntegration-Permission",
+                    "path": "UserServiceStack/UserApi/POST--users/CreateUserIntegration-Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "CreateUserLambda0154A2EB",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:aws:execute-api:us-east-1:",
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              ":",
+                              {
+                                "Ref": "UserApiB6C12381"
+                              },
+                              "/*/*/users"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/UserApi/POST--users/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "UserApiB6C12381"
+                        },
+                        "authorizationType": "NONE",
+                        "routeKey": "POST /users",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "UserApiPOSTusersCreateUserIntegration460B85BC"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.109.0-alpha.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+              "version": "2.109.0-alpha.0"
+            }
+          },
+          "GetUserByIdLambda": {
+            "id": "GetUserByIdLambda",
+            "path": "UserServiceStack/GetUserByIdLambda",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "UserServiceStack/GetUserByIdLambda/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "UserServiceStack/GetUserByIdLambda/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/GetUserByIdLambda/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "UserServiceStack/GetUserByIdLambda/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "UserServiceStack/GetUserByIdLambda/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "dynamodb:BatchGetItem",
+                                    "dynamodb:BatchWriteItem",
+                                    "dynamodb:ConditionCheckItem",
+                                    "dynamodb:DeleteItem",
+                                    "dynamodb:DescribeTable",
+                                    "dynamodb:GetItem",
+                                    "dynamodb:GetRecords",
+                                    "dynamodb:GetShardIterator",
+                                    "dynamodb:PutItem",
+                                    "dynamodb:Query",
+                                    "dynamodb:Scan",
+                                    "dynamodb:UpdateItem"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:aws:dynamodb:us-east-1:",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":table/users"
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "GetUserByIdLambdaServiceRoleDefaultPolicyF79EBCC7",
+                            "roles": [
+                              {
+                                "Ref": "GetUserByIdLambdaServiceRole7C87E7E4"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.105.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "UserServiceStack/GetUserByIdLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "UserServiceStack/GetUserByIdLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "UserServiceStack/GetUserByIdLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.105.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "UserServiceStack/GetUserByIdLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+                      },
+                      "s3Key": "0e461dcb0ca8644f45e569faa339552563fdc2786a2b83ec6c1eb92a6807a3a8.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "DYNAMODB_TABLE_NAME": "users",
+                        "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                      }
+                    },
+                    "functionName": "getUserById",
+                    "handler": "index.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "GetUserByIdLambdaServiceRole7C87E7E4",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs18.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.105.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+              "version": "2.105.0"
+            }
+          },
+          "CreateUserLambda": {
+            "id": "CreateUserLambda",
+            "path": "UserServiceStack/CreateUserLambda",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "UserServiceStack/CreateUserLambda/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "UserServiceStack/CreateUserLambda/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "UserServiceStack/CreateUserLambda/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "UserServiceStack/CreateUserLambda/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "UserServiceStack/CreateUserLambda/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "dynamodb:BatchGetItem",
+                                    "dynamodb:BatchWriteItem",
+                                    "dynamodb:ConditionCheckItem",
+                                    "dynamodb:DeleteItem",
+                                    "dynamodb:DescribeTable",
+                                    "dynamodb:GetItem",
+                                    "dynamodb:GetRecords",
+                                    "dynamodb:GetShardIterator",
+                                    "dynamodb:PutItem",
+                                    "dynamodb:Query",
+                                    "dynamodb:Scan",
+                                    "dynamodb:UpdateItem"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:aws:dynamodb:us-east-1:",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":table/users"
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "CreateUserLambdaServiceRoleDefaultPolicyC1FA6D44",
+                            "roles": [
+                              {
+                                "Ref": "CreateUserLambdaServiceRoleAFE39E4A"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.105.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.105.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "UserServiceStack/CreateUserLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "UserServiceStack/CreateUserLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.105.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "UserServiceStack/CreateUserLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.105.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.105.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "UserServiceStack/CreateUserLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+                      },
+                      "s3Key": "4963d35d2dbd81020c13eb2bd02b4f8ce63e2888d73d2fc9718c40c596d87e6a.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "DYNAMODB_TABLE_NAME": "users",
+                        "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+                      }
+                    },
+                    "functionName": "createUser",
+                    "handler": "index.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CreateUserLambdaServiceRoleAFE39E4A",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs18.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.105.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+              "version": "2.105.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "UserServiceStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "UserServiceStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.105.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "UserServiceStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.105.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "UserServiceStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.105.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.105.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.105.0"
+    }
+  }
+}
