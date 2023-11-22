@@ -382,6 +382,156 @@
     "aws:cdk:path": "UserServiceStack/UserApi/POST--users/Resource"
    }
   },
+  "UserApiPATCHusersuserIdEditUserIntegration23B47D13": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "UserApiB6C12381"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::GetAtt": [
+      "EditUserLambdaD0C48E24",
+      "Arn"
+     ]
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/UserApi/PATCH--users--{userId}/EditUserIntegration/Resource"
+   }
+  },
+  "UserApiPATCHusersuserIdEditUserIntegrationPermission26737CE6": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "EditUserLambdaD0C48E24",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "UserApiB6C12381"
+       },
+       "/*/*/users/{userId}"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/UserApi/PATCH--users--{userId}/EditUserIntegration-Permission"
+   }
+  },
+  "UserApiPATCHusersuserId7DF77141": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "UserApiB6C12381"
+    },
+    "AuthorizationType": "NONE",
+    "RouteKey": "PATCH /users/{userId}",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "UserApiPATCHusersuserIdEditUserIntegration23B47D13"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/UserApi/PATCH--users--{userId}/Resource"
+   }
+  },
+  "UserApiDELETEusersuserIdDeleteUserIntegrationD05B403F": {
+   "Type": "AWS::ApiGatewayV2::Integration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "UserApiB6C12381"
+    },
+    "IntegrationType": "AWS_PROXY",
+    "IntegrationUri": {
+     "Fn::GetAtt": [
+      "DeleteUserLambdaF75E2C54",
+      "Arn"
+     ]
+    },
+    "PayloadFormatVersion": "2.0"
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/UserApi/DELETE--users--{userId}/DeleteUserIntegration/Resource"
+   }
+  },
+  "UserApiDELETEusersuserIdDeleteUserIntegrationPermissionFBA306EF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DeleteUserLambdaF75E2C54",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "UserApiB6C12381"
+       },
+       "/*/*/users/{userId}"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/UserApi/DELETE--users--{userId}/DeleteUserIntegration-Permission"
+   }
+  },
+  "UserApiDELETEusersuserIdF9120668": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "UserApiB6C12381"
+    },
+    "AuthorizationType": "NONE",
+    "RouteKey": "DELETE /users/{userId}",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "UserApiDELETEusersuserIdDeleteUserIntegrationD05B403F"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/UserApi/DELETE--users--{userId}/Resource"
+   }
+  },
   "GetUserByIdLambdaServiceRole7C87E7E4": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -624,6 +774,252 @@
    "Metadata": {
     "aws:cdk:path": "UserServiceStack/CreateUserLambda/Resource",
     "aws:asset:path": "asset.4963d35d2dbd81020c13eb2bd02b4f8ce63e2888d73d2fc9718c40c596d87e6a",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "EditUserLambdaServiceRole6E3F55B7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/EditUserLambda/ServiceRole/Resource"
+   }
+  },
+  "EditUserLambdaServiceRoleDefaultPolicyFAC2F605": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:dynamodb:us-east-1:",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":table/users"
+          ]
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "EditUserLambdaServiceRoleDefaultPolicyFAC2F605",
+    "Roles": [
+     {
+      "Ref": "EditUserLambdaServiceRole6E3F55B7"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/EditUserLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "EditUserLambdaD0C48E24": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+     },
+     "S3Key": "7850f6bd764d05f7aeafd168a5365a7f0d88a83619a0de7615a736e84586a791.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE_NAME": "users",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "editUser",
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "EditUserLambdaServiceRole6E3F55B7",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "EditUserLambdaServiceRoleDefaultPolicyFAC2F605",
+    "EditUserLambdaServiceRole6E3F55B7"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/EditUserLambda/Resource",
+    "aws:asset:path": "asset.7850f6bd764d05f7aeafd168a5365a7f0d88a83619a0de7615a736e84586a791",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DeleteUserLambdaServiceRole5E37A90C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/DeleteUserLambda/ServiceRole/Resource"
+   }
+  },
+  "DeleteUserLambdaServiceRoleDefaultPolicyCDE1D3BE": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:dynamodb:us-east-1:",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":table/users"
+          ]
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DeleteUserLambdaServiceRoleDefaultPolicyCDE1D3BE",
+    "Roles": [
+     {
+      "Ref": "DeleteUserLambdaServiceRole5E37A90C"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/DeleteUserLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "DeleteUserLambdaF75E2C54": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+     },
+     "S3Key": "bce4fce7e0e4f79e3e3f95a84dd1da467f6cf2af5617cacccbdb700be802f6f8.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE_NAME": "users",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "deleteUser",
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "DeleteUserLambdaServiceRole5E37A90C",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "DeleteUserLambdaServiceRoleDefaultPolicyCDE1D3BE",
+    "DeleteUserLambdaServiceRole5E37A90C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "UserServiceStack/DeleteUserLambda/Resource",
+    "aws:asset:path": "asset.bce4fce7e0e4f79e3e3f95a84dd1da467f6cf2af5617cacccbdb700be802f6f8",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
